@@ -118,17 +118,6 @@ class PetriNet
         }
     }
 
-    private void DisplayResult()
-    {
-        var generalAmountOfClients = _processedClients + _missedClients + _clientsInQueue;
-        var chanceOfProcessing = generalAmountOfClients == 0 ? 0 : (double) _processedClients / generalAmountOfClients;
-        Console.WriteLine($"General amount of clients: {generalAmountOfClients}");
-        Console.WriteLine($"Processed clients: {_processedClients}");
-        Console.WriteLine($"Missed clients: {_missedClients}");
-        Console.WriteLine($"Clients remaining in queue: {_clientsInQueue}");
-        Console.WriteLine($"Chance of processing: {chanceOfProcessing}");
-    }
-
     private Thread GenerateThread(Action transition, int timeout)
     {
         return new Thread(() =>
@@ -152,6 +141,17 @@ class PetriNet
     private void StopTransition()
     {
         _stopTransitions = true;
+    }
+    
+    private void DisplayResult()
+    {
+        var generalAmountOfClients = _processedClients + _missedClients + _clientsInQueue;
+        var chanceOfProcessing = generalAmountOfClients == 0 ? 0 : (double) _processedClients / generalAmountOfClients;
+        Console.WriteLine($"General amount of clients: {generalAmountOfClients}");
+        Console.WriteLine($"Processed clients: {_processedClients}");
+        Console.WriteLine($"Missed clients: {_missedClients}");
+        Console.WriteLine($"Clients remaining in queue: {_clientsInQueue}");
+        Console.WriteLine($"Chance of processing: {chanceOfProcessing}");
     }
 
     private void DisplayIfApplied(string text)
