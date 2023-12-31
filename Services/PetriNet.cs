@@ -4,11 +4,11 @@ namespace IMUS_Coursework.Services;
 
 class PetriNet
 {
-    private const int TimeUnitMs = 100;
+    private const double TimeUnitMs = 10;
     private readonly int _maxQueueLength;
     private readonly int _numOfProcessingUnits;
-    private readonly int _clientsIntensity;
-    private readonly int _processingIntensity;
+    private readonly double _clientsIntensity;
+    private readonly double _processingIntensity;
     private readonly int _imitationTime;
     private readonly bool _displayAllProcesses;
 
@@ -50,7 +50,7 @@ class PetriNet
         var transition5 = GenerateThread(Transition5, clientsIntensityTimeout);
 
         StartTransitions(transition1, transition2, transition3, transition4, transition5);
-        Thread.Sleep(TimeUnitMs * _imitationTime);
+        Thread.Sleep(TimeSpan.FromMilliseconds(TimeUnitMs * _imitationTime));
         StopTransition();
         DisplayResult();
     }
@@ -120,14 +120,14 @@ class PetriNet
         }
     }
 
-    private Thread GenerateThread(Action transition, int timeout)
+    private Thread GenerateThread(Action transition, double timeout)
     {
         return new Thread(() =>
         {
             while (!_stopTransitions)
             {
                 transition();
-                Thread.Sleep(timeout);
+                Thread.Sleep(TimeSpan.FromMilliseconds(timeout));
             }
         });
     }
@@ -154,7 +154,7 @@ class PetriNet
         Console.WriteLine($"Missed clients: {_missedClients}");
         Console.WriteLine($"Clients remaining in queue: {_clientsInQueue}");
         Console.WriteLine($"Chance of processing: {chanceOfProcessing}");
-        Console.WriteLine($"Average query length: {_queryLengths.Sum() / _queryLengths.Count}");
+        Console.WriteLine($"Average query length: {(double) _queryLengths.Sum() / _queryLengths.Count}");
     }
 
     private void DisplayIfApplied(string text)
