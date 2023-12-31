@@ -9,11 +9,11 @@ public class Program
     {
         var petriNet = new PetriNet(new PetriParameters
         {
-            MaxQueueLength = 25,
-            NumOfProcessingUnits = 1,
-            ClientsIntensity = 0.033,
-            ProcessingIntensity = 0.033,
-            ImitationTime = 1440,
+            MaxQueueLength = 5,
+            NumOfProcessingUnits = 4,
+            ClientsIntensity = 0.5,
+            ProcessingIntensity = 0.1,
+            ImitationTime = 480,
             DisplayAllProcesses = false
         });
         

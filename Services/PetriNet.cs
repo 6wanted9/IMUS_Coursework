@@ -153,8 +153,8 @@ class PetriNet
         Console.WriteLine($"Processed clients: {_processedClients}");
         Console.WriteLine($"Missed clients: {_missedClients}");
         Console.WriteLine($"Clients remaining in queue: {_clientsInQueue}");
-        Console.WriteLine($"Chance of processing: {chanceOfProcessing}");
-        Console.WriteLine($"Average query length: {(double) _queryLengths.Sum() / _queryLengths.Count}");
+        Console.WriteLine($"Chance of processing: {chanceOfProcessing:0.##}");
+        Console.WriteLine($"Average query length: {((double) _queryLengths.Sum() / _queryLengths.Count):0.##}");
     }
 
     private void DisplayIfApplied(string text)
