@@ -21,6 +21,7 @@ class PetriNet
     
     private readonly object _lockObject = new();
     private bool _stopTransitions;
+    private readonly List<int> _queryLengths = new();
 
     public PetriNet(PetriParameters parameters)
     {
@@ -70,6 +71,7 @@ class PetriNet
     {
         lock (_lockObject)
         {
+            _queryLengths.Add(_clientsInQueue);
             if (_possibleClients > 0 && _clientsInQueue < _maxQueueLength)
             {
                 DisplayIfApplied("Transition 2: Moved to queue.");
@@ -152,6 +154,7 @@ class PetriNet
         Console.WriteLine($"Missed clients: {_missedClients}");
         Console.WriteLine($"Clients remaining in queue: {_clientsInQueue}");
         Console.WriteLine($"Chance of processing: {chanceOfProcessing}");
+        Console.WriteLine($"Average query length: {_queryLengths.Sum() / _queryLengths.Count}");
     }
 
     private void DisplayIfApplied(string text)
